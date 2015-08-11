@@ -39,22 +39,21 @@
  *    6. Use the "X2-Switch Control: 2-Switch Control for Modded SmartSense Open/Closed Sensor/Switch for Multiple Lights"
  *       App to control the lights 
  *
- *  I will be posting a detailed HOW-TO for this shortly.
  *
  */
  
 metadata {
 	definition (name: "X2-Switch: Modded SmartSense Open/Closed Sensor/Switch: TWO Switch Version", namespace: "smartthings", author: "SmartThings") {
     	capability "Battery"
-		capability "Configuration"
+	capability "Configuration"
         capability "Contact Sensor"
-		capability "Refresh"
-		capability "Temperature Measurement"
-        
+	capability "Refresh"
+	capability "Temperature Measurement"
+      
         command "enrollResponse"
  
  
-		fingerprint inClusters: "0000,0001,0003,0402,0500,0020,0B05", outClusters: "0019", manufacturer: "CentraLite", model: "3300-S"
+	fingerprint inClusters: "0000,0001,0003,0402,0500,0020,0B05", outClusters: "0019", manufacturer: "CentraLite", model: "3300-S"
         fingerprint inClusters: "0000,0001,0003,0402,0500,0020,0B05", outClusters: "0019", manufacturer: "CentraLite", model: "3300"
 	}
  
@@ -65,7 +64,7 @@ metadata {
 	preferences {
 		input description: "This feature allows you to correct any temperature variations by selecting an offset. Ex: If your sensor consistently reports a temp that's 5 degrees too warm, you'd enter \"-5\". If 3 degrees too cold, enter \"+3\".", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 		input "tempOffset", "number", title: "Temperature Offset", description: "Adjust temperature by this many degrees", range: "*..*", displayDuringSetup: false
-}
+	}
  
 	tiles {
     	standardTile("contact1", "device.contact", width: 2, height: 2) {
