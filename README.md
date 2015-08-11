@@ -12,7 +12,7 @@ Modified SmartSense (PEQ) Open/Closed Sensor to behave like TWO x 3-WAY on/off t
    on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
    for the specific language governing permissions and limitations under the License.
  
- 	This Device Type uses a single modified (hacked) SmartSense door open/close sensor wired to both an SPDT (3-way) 
+  This Device Type uses a single modified (hacked) SmartSense door open/close sensor wired to both an SPDT (3-way) 
   switch and a standard SPST wall switch, each of whicn can toggle on and off a set of GE Link Lights or similar 
   lights or switches.   
  
