@@ -2,7 +2,7 @@
  *  X2-Switch Control: 2-Switch Control for Modded SmartSense Open/Closed Sensor/Switch
  *  for Multiple Lights
  *
- *  August 10, 2015
+ *  August 12, 2015
  *  
  *	This SmartApp uses a single modified (hacked) SmartSense door open/close sensor wired to both an SPDT (3-way) 
  *  switch and a standard SPST wall switch, each of whicn can toggle on and off a set of GE Link Lights or similar 
@@ -87,7 +87,6 @@ def initialize() {
 
 def contactHandler(evt) {
 	def cname1 = "${contact1.displayName}"
-	def cname2 = "${contact2.displayName}"
 	def lname1 = "${switch1.displayName}"
 	def lname2 = "${switch2.displayName}"
     def sstate = "${switch1.currentSwitch}"
