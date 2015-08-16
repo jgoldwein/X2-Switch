@@ -2,7 +2,7 @@
  *  X2-Switch Control: 2-Switch Control for Modded SmartSense Open/Closed Sensor/Switch
  *  for Multiple Lights
  *
- *  August 12, 2015
+ *  August 16, 2015
  *  
  *  SmartApp code and Device Type Template code can be found at 
  *  https://github.com/jgoldwein/X2-Switch
@@ -18,7 +18,10 @@
  *  The SmartSense (PEQ) sensor has been on sale intermittently at Best Buy for under $20, and a 3-way SPDT plus a
  *  standard wall switch costs a few dollars at any hardware store, so you can put the whole thing together for 
  *  about $25.00.
- * 
+ *
+ *  Do at your own risk. If you are placing these switches in the existing gang box with hot wires, even if the wires
+ *  are capped off, this may be very dangerous and not up to code!
+ *
  *  The SmartSense door open/close sensor can be easily modded and wired to the 3-way wall switch and the standard
  *  wall switch as follows:
  * 
