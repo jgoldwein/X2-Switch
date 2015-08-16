@@ -4,6 +4,9 @@
  *
  *  August 12, 2015
  *  
+ *  SmartApp code and Device Type Template code can be found at 
+ *  https://github.com/jgoldwein/X2-Switch
+ *
  *	This SmartApp uses a single modified (hacked) SmartSense door open/close sensor wired to both an SPDT (3-way) 
  *  switch and a standard SPST wall switch, each of whicn can toggle on and off a set of GE Link Lights or similar 
  *  lights or switches.   
@@ -30,6 +33,8 @@
  *    5. Install the new switches and Thing into the gang box or a new gang box (use standard electrical safety measures). 
  *    6. Use this app to control the lights 
  *
+ * 
+ *
  *
  *  Copyright (c) 2015 Joel Goldwein (goldwein at gmail.com)
  *
@@ -54,19 +59,17 @@ definition(
 	iconX3Url: "http://cdn.device-icons.smartthings.com/Home/home30-icn@2x.png"
 )
 
-//		//https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png
-
 preferences {
 	section("Select the control/switch you are using") {
 		input "contact1", "capability.contactSensor", title: "Which Control?", required: true, multiple: true, submitOnChange: true
     }
 	// What primary light should this app be configured for?
    	section("Turn on/off which Link Lights with a 3-WAY switch...") {
-		input "switch1", "capability.switch", title: "Which Lights", required: true, multiple: true
+		input "switch1", "capability.switch", title: "Which Lights", required: true, multiple: true, submitOnChange: true
     }
 	// What primary light should this app be configured for?
    	section("Turn on/off which Link Lights with 2-WAY switch...") {
-		input "switch2", "capability.switch", title: "Which Lights", required: true, multiple: true
+		input "switch2", "capability.switch", title: "Which Lights", required: true, multiple: true, submitOnChange: true
     }
 }
 
@@ -92,7 +95,7 @@ def contactHandler(evt) {
     def sstate = "${switch1.currentSwitch}"
 def xcase = "${evt.value}"
 //  log.debug "xcase: $xcase"
-//	log.debug "Triggered. Sensor was set to $evt.value and $lname1 $lname2 was SW1: $sstate $switch1.currentSwitch SW2: $switch2.currentSwitch"
+	log.debug "Triggered. Sensor was set to $evt.value and $lname1 $lname2 was SW1: $sstate $switch1.currentSwitch SW2: $switch2.currentSwitch"
 //  The contactSensor capability can be either "open" or "closed"
 //  The actual sensor state is not relevant.  What is only important is the state change, 
 //  Code is triggered any time there is a state change in the door sensor
@@ -100,39 +103,48 @@ def xcase = "${evt.value}"
 //
 //  If the switch is UP (closed)
 //	log.debug "evt.value: $evt.value"
-//  log.debug "sstate: $sstate" 
+	log.debug "3-way switch lights state: $sstate" 
 	switch (xcase) {
     	case 'closed On':
-//	        log.debug "JWG1: closed On"  
-    	    if ("[off]" == sstate) {
-        		switch1.on()
+	        log.debug "JWG1: closed On"  
+    	    if (sstate.contains("off")) {
+				log.debug "sstate contains off"
+				switch1?.on()
    			}
-			switch2.on()
+			switch2?.on()
         	break
 		//	and if the switch is DOWN (open) 
 		case 'open On':
         //	Turn it OFF    
-//			log.debug "JWG2: open On"
-        	if ("[on]" == sstate) {
-				switch1.off()
+			log.debug "JWG2: open On"
+//        	if ("[on]" == sstate) {
+    	    if (sstate.contains("on")) {
+				log.debug "sstate contains on"
+				switch1?.off()
             }
-    	    switch2.on()
+    	    switch2?.on()
             break
        
 		case 'closed Off':
         //	Turn it ON    
-			if ("[off]" == sstate) {
-				switch1.on()
+			log.debug "JWG3: closed Off"
+//			if ("[off]" == sstate) {
+    	    if (sstate.contains("off")) {
+				log.debug "sstate contains off"
+				switch1?.on()
         	}
-        	switch2.off()
+        	switch2?.off()
 			break
         
 		case 'open Off':
         //	Turn it OFF    
-			if ( "[on]" == sstate )  {
-				switch1.off()
+			log.debug "JWG4: open Off"
+//			if ( "[on]" == sstate )  {
+    	    if (sstate.contains("on")) {
+				log.debug "sstate contains on"
+				switch1?.off()
 			}
-			switch2.off()
+			switch2?.off()
 			break
 		default:
         	log.debug "Uncertain case switch"
